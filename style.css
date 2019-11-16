@@ -17,4 +17,9 @@ body {
 
 .btn {
     background-color: darkslateblue;
+    color:white;
+}
+
+.question0, .question1, .question2, .question3, .question4 {
+    display:none;
 }
