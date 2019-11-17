@@ -1,18 +1,37 @@
-// $(document).ready(function () {
-
-
 document.querySelector(".start-quiz").addEventListener("click", function(){
     console.log("works");
+
     // document.querySelector(".clear").innerHTML="";
     document.querySelector(".clear").style.display="none";
     document.querySelector(".question0").style.display="block";
+
+   var timeEl = document.querySelector(".timer");
+   var secondsLeft =60;
+
+    function setTime() {
+        var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.innerHTML = "Timer " + secondsLeft;
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            sendMessage();
+         }
+    }, 1000);
+ };
+
+function sendMessage() {
+    timeEl.innerHTML = "Timer: 0";
+    alert("Time's Up!");
+
+};
+
+setTime();
+
 });
 
-var score = 75;
-var scoreEl = document.querySelector(".trackingScore");
-scoreEl.innerHTML = "Score: " + score;
-
-// if wrong answer, subtract from it. Right answers have no effect on score.
+var score = 50;
+    var scoreEl = document.querySelector(".trackingScore");
+    scoreEl.innerHTML = "Score: " + score;
 
 console.log(questions);
 var updateScore = function() {
@@ -66,23 +85,27 @@ for (i=0; i <questions.length; i++) {
     
     if (i < questions.length-1) {
     var nextButton = document.createElement ('button');
-    nextButton.innerHTML = "Next Question";
+    nextButton.innerHTML = "Next";
     innerDiv.appendChild(nextButton);
     outerDiv.appendChild(innerDiv);
+    innerDiv.classList.add ("clearfix");
     document.querySelector(".quiz-container").appendChild(outerDiv);
-    nextButton.classList.add("nextBtn"+i, "btn");
+    nextButton.classList.add("nextBtn"+i, "btn", "btn-block", "col-sm-1", "float-right");
     
-        } else if (i === questions.length-1) {
+        } else {
         var submitButton = document.createElement ('button');
         submitButton.innerHTML = "Submit";
         innerDiv.appendChild(submitButton);
         outerDiv.appendChild(innerDiv);
         document.querySelector(".quiz-container").appendChild(outerDiv);
-        submitButton.classList.add("submitBtn", "btn")
+        submitButton.classList.add("submitBtn", "btn", "btn-block", "col-sm-1", "float-right")
         document.querySelector(".submitBtn").addEventListener("click", function(){
-            // add score to localstorage
 
+            // add score to localstorage
+            var storage = localStorage.setItem ("score", score);
+            // console.log(localstorage.getItem("score"));
             //redirect to highscores page
+            // localStorage.getItem()
             //output on page (tables created on page?)
             window.location.href = "./highScores.html";
     })

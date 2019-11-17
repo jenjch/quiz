@@ -23,3 +23,17 @@ body {
 .question0, .question1, .question2, .question3, .question4 {
     display:none;
 }
+
+.trackingScore, .timer {
+    margin: auto 0;
+    color: darkslateblue;
+}
+
+.timer {
+    padding-left: 25px;
+}
+
+.optionButton {
+    margin-left: 10px;
+    color: darkslateblue;
+}
